@@ -7,12 +7,17 @@ from .models import Category, Post
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+
+from .permissions import IsAdminOrReadOnly
 
 
 
 class CategoryModelViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    # only admin can be add a category
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
 
 
     # for return created successfully message
@@ -61,6 +66,7 @@ class CategoryModelViewSet(ModelViewSet):
 class PostModelViewSet(ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+   
 
     # for return created successfully message
     def create(self, request, *args, **kwargs):
