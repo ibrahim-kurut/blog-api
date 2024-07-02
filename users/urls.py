@@ -1,9 +1,10 @@
 from django.urls import path
 
-from .views import RegisterCreateAPIView
+from .views import RegisterCreateAPIView, UserListAPIView
 
 # url register = /blog/api/users/register/
 
 urlpatterns = [
     path('register/', RegisterCreateAPIView.as_view()),
+    path('users/', UserListAPIView.as_view())
 ]
